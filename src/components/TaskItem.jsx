@@ -1,8 +1,12 @@
 import React from 'react'
 
-const TaskItem = () => {
+const TaskItem = ({task}) => {
   return (
-    <div>TaskItem</div>
+    <div>
+      <h4>
+        {task}
+      </h4>
+    </div>
   )
 }
 

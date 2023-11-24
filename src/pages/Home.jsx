@@ -1,17 +1,16 @@
-import React from 'react'
-import NavBar from '../components/NavBar'
-import TaskForm from '../components/TaskForm'
-import TaskList from '../components/TaskList'
+import React from "react";
+import NavBar from "../components/NavBar";
+import TaskForm from "../components/TaskForm";
 
 const Home = () => {
+ 
+
   return (
     <>
-        <NavBar/>
-        <TaskForm/>
-        <TaskList/>
+      <NavBar />
+      <TaskForm />
     </>
-    
-  )
-}
+  );
+};
 
-export default Home
+export default Home;
