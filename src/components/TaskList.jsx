@@ -4,7 +4,7 @@ import TaskItem from "./TaskItem";
 const TaskList = ({ tasks }) => {
   return (
     <>
-      <h1>Lista de tareas</h1>
+      <h2>Lista de tareas</h2>
       {tasks.map((task, index) => {
         return <TaskItem key={index} task={task} />;
       })}
