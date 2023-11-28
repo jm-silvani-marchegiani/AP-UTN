@@ -4,6 +4,7 @@ import TaskForm from "../components/TaskForm";
 
 const Home = () => {
   const [tasks, setTasks] = useState([]);
+  // console.log(tasks);
   return (
     <>
       <NavBar />

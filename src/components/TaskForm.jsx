@@ -2,6 +2,7 @@ import { Button, Input } from "@mui/material";
 import React, { useState } from "react";
 import SendIcon from "@mui/icons-material/Send";
 import TaskList from "./TaskList";
+import { v4 as uuidv4 } from "uuid";
 
 const TaskForm = ({ setTasks, tasks }) => {
   const [task, setTask] = useState({});
@@ -14,7 +15,13 @@ const TaskForm = ({ setTasks, tasks }) => {
   };
 
   const handleTask = (e) => {
-    setTask({ ...task, [e.target.name]: e.target.value });
+    setTask({
+      ...task,
+      [e.target.name]: e.target.value,
+      completed: false,
+      id: uuidv4(),
+      createdAt: new Date(),
+    });
   };
 
   return (
@@ -23,17 +30,18 @@ const TaskForm = ({ setTasks, tasks }) => {
         <h1>TO DO LIST</h1>
         <Input
           placeholder="Tarea"
-          name="tarea"
+          name="title"
           variant="outlined"
-          value={task.tarea || ""}
+          value={task.title || ""}
           onChange={handleTask}
+          required
         />
         <br />
         <Input
           placeholder="Descripcion"
-          name="descripcion"
+          name="description"
           variant="outlined"
-          value={task.descripcion || ""}
+          value={task.description || ""}
           onChange={handleTask}
         />
 
@@ -42,7 +50,7 @@ const TaskForm = ({ setTasks, tasks }) => {
         </Button>
       </form>
 
-      <TaskList tasks={tasks} />
+      <TaskList setTasks={setTasks} tasks={tasks} />
     </>
   );
 };
