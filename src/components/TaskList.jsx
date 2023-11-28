@@ -1,10 +1,18 @@
 import React from "react";
 import TaskItem from "./TaskItem";
-
+import { Container, Typography } from "@mui/material";
+import { ReactComponent as ZeroTasks } from "../assets/zero-task.svg";
 const TaskList = ({ tasks, setTasks }) => {
   return (
-    <>
-      <h2>Lista de tareas</h2>
+    <Container sx={{ display: "grid", justifyItems: "center" }}>
+      <Typography
+        variant="h4"
+        sx={{ textAlign: "center", marginTop: "1rem" }}
+        gutterBottom
+      >
+        Lista de Tareas
+      </Typography>
+      {tasks.length === 0 && <ZeroTasks style={{ marginTop: "2rem" }} />}
       {tasks
         .slice()
         .sort((a, b) => b.createdAt - a.createdAt)
@@ -18,7 +26,7 @@ const TaskList = ({ tasks, setTasks }) => {
             />
           );
         })}
-    </>
+    </Container>
   );
 };
 

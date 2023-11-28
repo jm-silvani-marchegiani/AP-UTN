@@ -1,8 +1,18 @@
-import { Button, Input } from "@mui/material";
+import { Container, Grid, IconButton, Input } from "@mui/material";
 import React, { useState } from "react";
-import SendIcon from "@mui/icons-material/Send";
 import TaskList from "./TaskList";
+import { ReactComponent as ButtonAdd } from "../assets/button-add.svg";
+
 import { v4 as uuidv4 } from "uuid";
+import styled from "@emotion/styled";
+
+const StyledButtonAdd = styled(ButtonAdd)({
+  "&:hover": {
+    "& rect": {
+      fill: "#23221F",
+    },
+  },
+});
 
 const TaskForm = ({ setTasks, tasks }) => {
   const [task, setTask] = useState({});
@@ -25,33 +35,56 @@ const TaskForm = ({ setTasks, tasks }) => {
   };
 
   return (
-    <>
+    <Container
+      sx={{ display: "grid", justifyContent: "center", maxWidth: "80%" }}
+    >
       <form onSubmit={handleSubmit}>
-        <h1>TO DO LIST</h1>
-        <Input
-          placeholder="Tarea"
-          name="title"
-          variant="outlined"
-          value={task.title || ""}
-          onChange={handleTask}
-          required
-        />
-        <br />
-        <Input
-          placeholder="Descripcion"
-          name="description"
-          variant="outlined"
-          value={task.description || ""}
-          onChange={handleTask}
-        />
-
-        <Button type="submit" variant="contained" endIcon={<SendIcon />}>
-          Send
-        </Button>
+        <Grid container>
+          <Grid container item xs={10} sx={{ paddingY: "1rem", gap: "8px" }}>
+            <Input
+              placeholder="Tarea..."
+              name="title"
+              variant="outlined"
+              value={task.title || ""}
+              onChange={handleTask}
+              fullWidth
+              disableUnderline
+              required
+              sx={{
+                height: "32px",
+                border: "1px solid orange",
+                borderRadius: "4px",
+                color: "#F0E3CA",
+                padding: "10px",
+              }}
+            />
+            <Input
+              placeholder="Descripción..."
+              name="description"
+              variant="outlined"
+              fullWidth
+              disableUnderline
+              value={task.description || ""}
+              onChange={handleTask}
+              sx={{
+                height: "32px",
+                border: "1px solid orange",
+                borderRadius: "4px",
+                color: "#F0E3CA",
+                padding: "10px",
+              }}
+            />
+          </Grid>
+          <Grid container item xs={2}>
+            <IconButton type="submit" variant="contained">
+              <StyledButtonAdd />
+            </IconButton>
+          </Grid>
+        </Grid>
       </form>
 
       <TaskList setTasks={setTasks} tasks={tasks} />
-    </>
+    </Container>
   );
 };
 
