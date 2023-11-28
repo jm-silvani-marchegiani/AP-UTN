@@ -11,13 +11,11 @@ const TaskItem = ({ task, setTasks, tasks }) => {
   const toggleTaskStatus = (id) => {
     let result = tasks.map((element) => {
       if (element.id === id) {
-        // Crear un nuevo objeto para no modificar el original directamente
         return {
           ...element,
           completed: !element.completed,
         };
       }
-      // Devolver el elemento sin cambios si no es el que se está modificando
       return element;
     });
 
