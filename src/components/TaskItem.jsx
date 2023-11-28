@@ -17,6 +17,7 @@ const TaskItem = ({ task, setTasks, tasks }) => {
     setTasks(result);
   };
   // eslint-disable-next-line
+  // eslint-disable-next-line
   const toggleTaskStatus = (id) => {
     let result = tasks.map((element) => {
       if (element.id === id) {
