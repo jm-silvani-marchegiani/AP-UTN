@@ -1,4 +1,4 @@
-import { Container, Grid, IconButton, Input } from "@mui/material";
+import { Box, Grid, IconButton, Input } from "@mui/material";
 import React, { useState } from "react";
 import TaskList from "./TaskList";
 import { ReactComponent as ButtonAdd } from "../assets/button-add.svg";
@@ -35,12 +35,18 @@ const TaskForm = ({ setTasks, tasks }) => {
   };
 
   return (
-    <Container
-      sx={{ display: "grid", justifyContent: "center", maxWidth: "80%" }}
+    <Box
+      sx={{ display: "grid", justifyContent: "space-around", width: "100%" }}
     >
       <form onSubmit={handleSubmit}>
-        <Grid container>
-          <Grid container item xs={10} sx={{ paddingY: "1rem", gap: "8px" }}>
+        <Grid container sx={{ height: "70px" }}>
+          <Grid
+            container
+            item
+            xs={9.5}
+            md={10}
+            sx={{ height: "100%", rowGap: "7px" }}
+          >
             <Input
               placeholder="Tarea..."
               name="title"
@@ -52,10 +58,11 @@ const TaskForm = ({ setTasks, tasks }) => {
               required
               sx={{
                 height: "32px",
-                border: "1px solid orange",
+                border: "1px solid #FF8303",
                 borderRadius: "4px",
                 color: "#F0E3CA",
-                padding: "10px",
+                paddingInline: "10px",
+                ":hover": { backgroundColor: "#2B2A27" },
               }}
             />
             <Input
@@ -68,23 +75,32 @@ const TaskForm = ({ setTasks, tasks }) => {
               onChange={handleTask}
               sx={{
                 height: "32px",
-                border: "1px solid orange",
+                border: "1px solid #FF8303",
                 borderRadius: "4px",
                 color: "#F0E3CA",
-                padding: "10px",
+                paddingInline: "10px",
+                ":hover": { backgroundColor: "#2B2A27" },
               }}
             />
           </Grid>
-          <Grid container item xs={2}>
+          <Grid
+            container
+            item
+            xs={2}
+            sx={{ height: "100%", alignContent: "center" }}
+          >
             <IconButton type="submit" variant="contained">
               <StyledButtonAdd />
             </IconButton>
           </Grid>
         </Grid>
       </form>
-
-      <TaskList setTasks={setTasks} tasks={tasks} />
-    </Container>
+      <Grid container xs={12}>
+        <Grid container item sx={{ display: "flex", justifyContent: "center" }}>
+          <TaskList setTasks={setTasks} tasks={tasks} />
+        </Grid>
+      </Grid>
+    </Box>
   );
 };
 

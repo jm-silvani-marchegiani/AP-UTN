@@ -18,7 +18,7 @@ const Home = () => {
             sx={{ textAlign: "center", marginTop: "1rem" }}
             gutterBottom
           >
-            Trabajo Integrador Final
+            App de Tareas
           </Typography>
           <TaskForm setTasks={setTasks} tasks={tasks} />
         </Box>
