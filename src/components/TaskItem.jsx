@@ -7,21 +7,17 @@ import {
   IconButton,
   Typography,
 } from "@mui/material";
-import { ReactComponent as DeleteButton } from "../assets/button-delete.svg";
-import styled from "@emotion/styled";
 
 import Dialog from "@mui/material/Dialog";
 import DialogActions from "@mui/material/DialogActions";
 import DialogContent from "@mui/material/DialogContent";
 import DialogContentText from "@mui/material/DialogContentText";
-
-const StyledDeleteButton = styled(DeleteButton)({
-  "&:hover": {
-    "& rect": {
-      fill: "#23221F",
-    },
-  },
-});
+import {
+  StyledCheckedButton,
+  StyledDeleteButton,
+  StyledEditButton,
+  StyledUncheckedButton,
+} from "../utils/Icons";
 
 const TaskItem = ({ task, setTasks, tasks }) => {
   const [open, setOpen] = useState(false);
@@ -39,7 +35,6 @@ const TaskItem = ({ task, setTasks, tasks }) => {
     }
   };
 
-  // eslint-disable-next-line
   const toggleTaskStatus = (id) => {
     let result = tasks.map((element) => {
       if (element.id === id) {
@@ -53,7 +48,6 @@ const TaskItem = ({ task, setTasks, tasks }) => {
 
     setTasks(result);
   };
-
   return (
     <>
       {/* DIALOG FEATURE */}
@@ -138,7 +132,6 @@ const TaskItem = ({ task, setTasks, tasks }) => {
       >
         <Grid
           container
-          onClick={() => toggleTaskStatus(task.id)}
           sx={{
             border: "2px solid #A35709",
             borderRadius: "8px",
@@ -148,7 +141,6 @@ const TaskItem = ({ task, setTasks, tasks }) => {
           }}
         >
           <Grid
-            onClick={() => toggleTaskStatus(task.id)}
             container
             item
             xs={10}
@@ -181,10 +173,52 @@ const TaskItem = ({ task, setTasks, tasks }) => {
             </Typography>
           </Grid>
 
-          <Grid container item xs={2} sx={{ display: "grid" }}>
-            <IconButton variant="outlined" type="button" disableRipple>
-              <StyledDeleteButton onClick={() => handleDelete(task.id)} />
-            </IconButton>
+          <Grid
+            container
+            item
+            xs={2}
+            sx={{
+              display: "flex",
+              alignContent: "center",
+            }}
+          >
+            <Grid container item xs={12}>
+              <IconButton
+                onClick={() => handleDelete(task.id)}
+                variant="outlined"
+                type="button"
+                disableRipple
+              >
+                <StyledDeleteButton title="Eliminar tarea" />
+              </IconButton>
+            </Grid>
+            <Grid container item xs={12}>
+              <IconButton
+                onClick={() => handleDelete(task.id)}
+                variant="outlined"
+                type="button"
+                disableRipple
+              >
+                <StyledEditButton title="Editar tarea" />
+              </IconButton>
+            </Grid>
+            <Grid container item xs={12}>
+              <IconButton
+                onClick={() => toggleTaskStatus(task.id)}
+                variant="outlined"
+                type="button"
+                disableRipple
+              >
+                {task.completed ? (
+                  <StyledUncheckedButton title="Marcar tarea como pendiente" />
+                ) : (
+                  <StyledCheckedButton
+                    title="Marcar tarea como completada"
+                    onClick={() => toggleTaskStatus(task.id)}
+                  />
+                )}
+              </IconButton>
+            </Grid>
             {/* <Button onClick={() => toggleTaskStatus(task.id)} variant="outlined">
             {!task.completed ? "Completar Tarea" : "Marcar como Pendiente"}
           </Button> */}

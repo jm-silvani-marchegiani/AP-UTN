@@ -1,18 +1,12 @@
 import { Box, Grid, IconButton, Input } from "@mui/material";
 import React, { useState } from "react";
 import TaskList from "./TaskList";
-import { ReactComponent as ButtonAdd } from "../assets/button-add.svg";
 
 import { v4 as uuidv4 } from "uuid";
 import styled from "@emotion/styled";
+import { StyledAddButton } from "../utils/Icons";
 
-const StyledButtonAdd = styled(ButtonAdd)({
-  "&:hover": {
-    "& rect": {
-      fill: "#23221F",
-    },
-  },
-});
+
 
 const TaskForm = ({ setTasks, tasks }) => {
   const [task, setTask] = useState({});
@@ -90,7 +84,7 @@ const TaskForm = ({ setTasks, tasks }) => {
             sx={{ height: "100%", alignContent: "center" }}
           >
             <IconButton type="submit" variant="contained">
-              <StyledButtonAdd />
+              <StyledAddButton title="Añadir tarea" />
             </IconButton>
           </Grid>
         </Grid>
