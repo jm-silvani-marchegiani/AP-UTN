@@ -138,6 +138,7 @@ const TaskItem = ({ task, setTasks, tasks }) => {
       >
         <Grid
           container
+          onClick={() => toggleTaskStatus(task.id)}
           sx={{
             border: "2px solid #A35709",
             borderRadius: "8px",
