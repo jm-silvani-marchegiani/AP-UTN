@@ -147,6 +147,7 @@ const TaskItem = ({ task, setTasks, tasks }) => {
           }}
         >
           <Grid
+            onClick={() => toggleTaskStatus(task.id)}
             container
             item
             xs={10}
