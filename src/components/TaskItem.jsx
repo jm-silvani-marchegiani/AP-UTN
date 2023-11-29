@@ -148,6 +148,9 @@ const TaskItem = ({ task, setTasks, tasks }) => {
               display: "grid",
               wordBreak: "break-word",
               padding: "16px",
+              backgroundColor: task.completed
+                ? "rgba(0, 255, 0, 0.3)"
+                : "rgba(255, 230, 0, 0.3)",
             }}
           >
             <Typography
