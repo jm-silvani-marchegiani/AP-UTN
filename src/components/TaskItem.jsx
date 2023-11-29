@@ -1,7 +1,19 @@
-import React from "react";
-import { Box, Grid, IconButton, Typography } from "@mui/material";
+import React, { useState } from "react";
+import {
+  Box,
+  Button,
+  Container,
+  Grid,
+  IconButton,
+  Typography,
+} from "@mui/material";
 import { ReactComponent as DeleteButton } from "../assets/button-delete.svg";
 import styled from "@emotion/styled";
+
+import Dialog from "@mui/material/Dialog";
+import DialogActions from "@mui/material/DialogActions";
+import DialogContent from "@mui/material/DialogContent";
+import DialogContentText from "@mui/material/DialogContentText";
 
 const StyledDeleteButton = styled(DeleteButton)({
   "&:hover": {
@@ -12,11 +24,21 @@ const StyledDeleteButton = styled(DeleteButton)({
 });
 
 const TaskItem = ({ task, setTasks, tasks }) => {
-  const handleDelete = (id) => {
-    let result = tasks.filter((element) => element.id !== id);
-    setTasks(result);
+  const [open, setOpen] = useState(false);
+
+  const handleClose = () => {
+    setOpen(false);
   };
-  // eslint-disable-next-line
+
+  const handleDelete = (id, confirmation) => {
+    setOpen(true);
+    if (confirmation) {
+      let result = tasks.filter((element) => element.id !== id);
+      setTasks(result);
+      setOpen(false);
+    }
+  };
+
   // eslint-disable-next-line
   const toggleTaskStatus = (id) => {
     let result = tasks.map((element) => {
@@ -41,6 +63,78 @@ const TaskItem = ({ task, setTasks, tasks }) => {
         marginTop: "33px",
       }}
     >
+      {/* DIALOG FEATURE */}
+      <Dialog
+        open={open}
+        onClose={handleClose}
+        aria-labelledby="alert-dialog-title"
+        aria-describedby="alert-dialog-description"
+        PaperProps={{
+          sx: {
+            width: "281px",
+            height: "143px",
+            borderBlockStart: "5px solid #A35709",
+            borderRadius: "0px",
+            backgroundColor: "#242320",
+          },
+        }}
+      >
+        <DialogContent>
+          <DialogContentText id="alert-dialog-description">
+            <Typography
+              sx={{
+                fontSize: "24px",
+                textAlign: "center",
+                color: "#fff",
+                paddingBlockStart: "0.4rem",
+              }}
+              gutterBottom
+            >
+              ¿Borrar ésta tarea?
+            </Typography>
+          </DialogContentText>
+        </DialogContent>
+        <DialogActions>
+          <Container
+            sx={{
+              display: "flex",
+              justifyContent: "center",
+              alignItems: "center",
+              gap: "10px",
+            }}
+          >
+            <Button
+              sx={{
+                width: "64px",
+                height: "24px",
+                border: "1px solid #A35709",
+                borderRadius: "4px",
+                color: "#D9D9D9",
+                ":hover": { backgroundColor: "#2B2A27" },
+                textTransform: "none",
+              }}
+              onClick={() => handleDelete(task.id, true)}
+              autoFocus
+            >
+              Si
+            </Button>
+            <Button
+              sx={{
+                width: "64px",
+                height: "24px",
+                border: "1px solid #A35709",
+                borderRadius: "4px",
+                color: "#D9D9D9",
+                ":hover": { backgroundColor: "#2B2A27" },
+                textTransform: "none",
+              }}
+              onClick={handleClose}
+            >
+              No
+            </Button>
+          </Container>
+        </DialogActions>
+      </Dialog>
       <Grid
         container
         sx={{
