@@ -148,6 +148,9 @@ const TaskItem = ({ task, setTasks, tasks }) => {
               display: "grid",
               wordBreak: "break-word",
               padding: "16px",
+              backgroundColor: task.completed
+                ? "rgba(0, 255, 0, 0.3)"
+                : "rgba(255, 230, 0, 0.3)",
             }}
           >
             <Typography
@@ -182,7 +185,12 @@ const TaskItem = ({ task, setTasks, tasks }) => {
               alignContent: "center",
             }}
           >
-            <Grid container item xs={12}>
+            <Grid
+              sx={{ display: "flex", justifyContent: "center" }}
+              container
+              item
+              xs={12}
+            >
               <IconButton
                 onClick={() => handleDelete(task.id)}
                 variant="outlined"
@@ -192,7 +200,12 @@ const TaskItem = ({ task, setTasks, tasks }) => {
                 <StyledDeleteButton title="Eliminar tarea" />
               </IconButton>
             </Grid>
-            <Grid container item xs={12}>
+            <Grid
+              sx={{ display: "flex", justifyContent: "center" }}
+              container
+              item
+              xs={12}
+            >
               <IconButton
                 onClick={() => handleDelete(task.id)}
                 variant="outlined"
@@ -202,7 +215,12 @@ const TaskItem = ({ task, setTasks, tasks }) => {
                 <StyledEditButton title="Editar tarea" />
               </IconButton>
             </Grid>
-            <Grid container item xs={12}>
+            <Grid
+              sx={{ display: "flex", justifyContent: "center" }}
+              container
+              item
+              xs={12}
+            >
               <IconButton
                 onClick={() => toggleTaskStatus(task.id)}
                 variant="outlined"
