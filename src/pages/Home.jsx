@@ -7,7 +7,6 @@ import { Typography } from "@mui/material";
 
 const Home = () => {
   const [tasks, setTasks] = useState([]);
-  // console.log(tasks);
   return (
     <>
       <NavBar />
