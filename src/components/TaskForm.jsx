@@ -39,7 +39,7 @@ const TaskForm = ({ setTasks, tasks }) => {
       sx={{ display: "grid", justifyContent: "space-around", width: "100%" }}
     >
       <form onSubmit={handleSubmit}>
-        <Grid container sx={{ height: "70px" }}>
+        <Grid container sx={{ height: "70px", marginBottom: "33px" }}>
           <Grid
             container
             item
@@ -95,7 +95,7 @@ const TaskForm = ({ setTasks, tasks }) => {
           </Grid>
         </Grid>
       </form>
-      <Grid container xs={12}>
+      <Grid container>
         <Grid container item sx={{ display: "flex", justifyContent: "center" }}>
           <TaskList setTasks={setTasks} tasks={tasks} />
         </Grid>
