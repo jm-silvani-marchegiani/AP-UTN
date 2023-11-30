@@ -22,6 +22,7 @@ import {
 
 const TaskItem = ({ task, setTasks, tasks }) => {
   const [openEditModal, setOpenEditModal] = useState(false);
+  const [modalData, setModalData] = useState({ title: "", description: "" });
   const [open, setOpen] = useState(false);
 
   const handleClose = () => {
@@ -44,7 +45,21 @@ const TaskItem = ({ task, setTasks, tasks }) => {
   const handleEdit = (id, confirmation) => {
     setOpenEditModal(true);
     if (confirmation) {
-      //codigo
+      const taskIndex = tasks.findIndex((element) => element.id === id);
+      const updatedTasks = [...tasks];
+      const updatedTask = { ...updatedTasks[taskIndex] };
+      //Modificar titulo
+      updatedTask.title =
+        modalData.title !== "" ? modalData.title : updatedTask.title;
+      //Modificar descripcion
+      updatedTask.description =
+        modalData.description !== ""
+          ? modalData.description
+          : updatedTask.description;
+
+      updatedTasks[taskIndex] = updatedTask;
+      setTasks(updatedTasks);
+      setModalData({ title: "", description: "" });
       setOpenEditModal(false);
     }
   };
@@ -169,6 +184,12 @@ const TaskItem = ({ task, setTasks, tasks }) => {
                   name="modalTitle"
                   variant="outlined"
                   defaultValue={task.title || ""}
+                  onChange={(e) => {
+                    setModalData({
+                      ...modalData,
+                      title: e.target.value,
+                    });
+                  }}
                   fullWidth
                   disableUnderline
                   required
@@ -190,6 +211,12 @@ const TaskItem = ({ task, setTasks, tasks }) => {
                   multiline
                   disableUnderline
                   defaultValue={task.description || ""}
+                  onChange={(e) => {
+                    setModalData({
+                      ...modalData,
+                      description: e.target.value,
+                    });
+                  }}
                   sx={{
                     height: "343px",
                     border: "1px solid #FF8303",
