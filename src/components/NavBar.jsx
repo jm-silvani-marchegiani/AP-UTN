@@ -13,7 +13,7 @@ import { Link } from "react-router-dom";
 
 const pages = [
   { title: "Home", url: "/" },
-  { title: "Integrantes", url: "/integrantes" },
+  // { title: "Integrantes", url: "/integrantes" },
 ];
 
 function NavBar() {
