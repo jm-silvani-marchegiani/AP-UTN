@@ -138,6 +138,9 @@ const TaskItem = ({ task, setTasks, tasks }) => {
             maxWidth: "45rem",
             marginRight: { lg: "3rem", xs: "0" },
             ":hover": { backgroundColor: "#2B2A27" },
+            backgroundSize: "cover",
+            backgroundPosition: "center",
+            backgroundImage: task.completed && 'url("./assets/completed.png")',
           }}
         >
           <Grid
@@ -148,16 +151,17 @@ const TaskItem = ({ task, setTasks, tasks }) => {
               display: "grid",
               wordBreak: "break-word",
               padding: "16px",
-              backgroundColor: task.completed
-                ? "rgba(0, 255, 0, 0.3)"
-                : "rgba(255, 230, 0, 0.3)",
+              // backgroundColor: task.completed
+              //   ? "rgba(0, 255, 0, 0.3)" : "rgba(255, 230, 0, 0.3)"
             }}
           >
             <Typography
               sx={{
                 textDecoration: task.completed ? "line-through" : "none",
                 fontSize: "22px",
-                color: "#F0E3CA",
+                // color: "#F0E3CA",
+                color: "#FF8303",
+
                 fontWeight: "bold",
               }}
               gutterBottom
@@ -168,7 +172,8 @@ const TaskItem = ({ task, setTasks, tasks }) => {
               sx={{
                 textDecoration: task.completed ? "line-through" : "none",
                 fontSize: "14px",
-                color: "#F0E3CA",
+                // color: "#F0E3CA",
+                color: "#FF8303",
               }}
               gutterBottom
             >
@@ -237,9 +242,6 @@ const TaskItem = ({ task, setTasks, tasks }) => {
                 )}
               </IconButton>
             </Grid>
-            {/* <Button onClick={() => toggleTaskStatus(task.id)} variant="outlined">
-            {!task.completed ? "Completar Tarea" : "Marcar como Pendiente"}
-          </Button> */}
           </Grid>
         </Grid>
       </Box>
