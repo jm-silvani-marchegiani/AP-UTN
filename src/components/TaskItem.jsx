@@ -5,6 +5,7 @@ import {
   Container,
   Grid,
   IconButton,
+  Input,
   Typography,
 } from "@mui/material";
 
@@ -20,10 +21,15 @@ import {
 } from "../utils/Icons";
 
 const TaskItem = ({ task, setTasks, tasks }) => {
+  const [openEditModal, setOpenEditModal] = useState(false);
   const [open, setOpen] = useState(false);
 
   const handleClose = () => {
     setOpen(false);
+  };
+
+  const handleCloseEditModal = () => {
+    setOpenEditModal(false);
   };
 
   const handleDelete = (id, confirmation) => {
@@ -32,6 +38,14 @@ const TaskItem = ({ task, setTasks, tasks }) => {
       let result = tasks.filter((element) => element.id !== id);
       setTasks(result);
       setOpen(false);
+    }
+  };
+
+  const handleEdit = (id, confirmation) => {
+    setOpenEditModal(true);
+    if (confirmation) {
+      //codigo
+      setOpenEditModal(false);
     }
   };
 
@@ -50,7 +64,7 @@ const TaskItem = ({ task, setTasks, tasks }) => {
   };
   return (
     <>
-      {/* DIALOG FEATURE */}
+      {/*DELETE DIALOG FEATURE */}
       <Dialog
         open={open}
         onClose={handleClose}
@@ -120,7 +134,117 @@ const TaskItem = ({ task, setTasks, tasks }) => {
           </Container>
         </DialogActions>
       </Dialog>
-      {/* DIALOG FEATURE */}
+      {/*DELETE DIALOG FEATURE */}
+
+      {/*EDIT DIALOG FEATURE */}
+      <Dialog
+        open={openEditModal}
+        onClose={handleCloseEditModal}
+        aria-labelledby="alert-dialog-title"
+        aria-describedby="alert-dialog-description"
+        PaperProps={{
+          sx: {
+            width: "360px",
+            height: "451px",
+            borderBlockStart: "5px solid #A35709",
+            borderRadius: "0px",
+            backgroundColor: "#242320",
+          },
+        }}
+      >
+        <DialogContent>
+          <Box sx={{ display: "flex", height: "100%" }}>
+            <Grid
+              container
+              sx={{ height: "70px", marginBottom: "33px", paddingBlock: "" }}
+            >
+              <Grid
+                container
+                item
+                xs={12}
+                sx={{ height: "100%", rowGap: "7px" }}
+              >
+                <Input
+                  placeholder="Tarea..."
+                  name="modalTitle"
+                  variant="outlined"
+                  defaultValue={task.title || ""}
+                  fullWidth
+                  disableUnderline
+                  required
+                  sx={{
+                    height: "32px",
+                    border: "1px solid #FF8303",
+                    borderRadius: "4px",
+                    color: "#F0E3CA",
+                    paddingInline: "10px",
+                    ":hover": { backgroundColor: "#2B2A27" },
+                  }}
+                />
+                <Input
+                  placeholder="Descripción..."
+                  name="modalDescription"
+                  variant="outlined"
+                  fullWidth
+                  rows={14}
+                  multiline
+                  disableUnderline
+                  defaultValue={task.description || ""}
+                  sx={{
+                    height: "343px",
+                    border: "1px solid #FF8303",
+                    borderRadius: "4px",
+                    color: "#F0E3CA",
+                    paddingInline: "10px",
+                    ":hover": { backgroundColor: "#2B2A27" },
+                  }}
+                />
+              </Grid>
+            </Grid>
+          </Box>
+        </DialogContent>
+        <DialogActions>
+          <Container
+            sx={{
+              display: "flex",
+              justifyContent: "center",
+              alignItems: "center",
+              gap: "10px",
+            }}
+          >
+            <Button
+              sx={{
+                width: "70px",
+                height: "24px",
+                border: "1px solid #A35709",
+                borderRadius: "4px",
+                color: "#D9D9D9",
+                ":hover": { backgroundColor: "#2B2A27" },
+                textTransform: "none",
+              }}
+              onClick={() => handleEdit(task.id, true)}
+              autoFocus
+            >
+              Guardar
+            </Button>
+            <Button
+              sx={{
+                width: "70px",
+                height: "24px",
+                border: "1px solid #A35709",
+                borderRadius: "4px",
+                color: "#D9D9D9",
+                ":hover": { backgroundColor: "#2B2A27" },
+                textTransform: "none",
+              }}
+              onClick={handleCloseEditModal}
+            >
+              Cancelar
+            </Button>
+          </Container>
+        </DialogActions>
+      </Dialog>
+      {/*EDIT DIALOG FEATURE */}
 
       <Box
         sx={{
@@ -212,7 +336,7 @@ const TaskItem = ({ task, setTasks, tasks }) => {
               xs={12}
             >
               <IconButton
-                onClick={() => handleDelete(task.id)}
+                onClick={() => handleEdit(task.id)}
                 variant="outlined"
                 type="button"
                 disableRipple
