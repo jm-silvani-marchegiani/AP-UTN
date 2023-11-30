@@ -386,10 +386,7 @@ const TaskItem = ({ task, setTasks, tasks }) => {
                 {task.completed ? (
                   <StyledUncheckedButton title="Marcar tarea como pendiente" />
                 ) : (
-                  <StyledCheckedButton
-                    title="Marcar tarea como completada"
-                    onClick={() => toggleTaskStatus(task.id)}
-                  />
+                  <StyledCheckedButton title="Marcar tarea como completada" />
                 )}
               </IconButton>
             </Grid>

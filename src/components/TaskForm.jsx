@@ -3,10 +3,7 @@ import React, { useState } from "react";
 import TaskList from "./TaskList";
 
 import { v4 as uuidv4 } from "uuid";
-import styled from "@emotion/styled";
 import { StyledAddButton } from "../utils/Icons";
-
-
 
 const TaskForm = ({ setTasks, tasks }) => {
   const [task, setTask] = useState({});
